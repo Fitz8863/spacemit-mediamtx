@@ -28,7 +28,7 @@ mediamtx
 mediamtx.yml
 ```
 
-`mediamtx.yml` 默认开启 RTSP、WebRTC/WHEP 和仅本机访问的 Control API，并预配置 `dice` 发布路径。
+`mediamtx.yml` 是上游 MediaMTX `v1.20.1` 的原始默认配置，未针对 K3 修改，SHA-256 为 `bc3c9771d125fd632c834b5abf2e00d305a004659f4900cd2c0977b429f56946`。K3 的 RTSP → WebRTC 精简示例单独位于仓库的 `config/mediamtx-k3.yml`，不会替换 Release 中的官方配置。
 
 ## 已验证
 

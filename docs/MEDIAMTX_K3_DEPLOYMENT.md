@@ -359,6 +359,8 @@ v1.20.1
 
 ## 9. 编写 MediaMTX 配置
 
+> Release 压缩包里的 `mediamtx.yml` 保持上游 v1.20.1 官方原样。下面是骰子项目的 K3 精简示例；仓库中对应文件为 `config/mediamtx-k3.yml`。部署时可以将它复制到板端并按实际 IP 修改。
+
 在板端创建：
 
 ```text

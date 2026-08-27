@@ -28,7 +28,8 @@ MediaMTX 及其原始源码版权归原项目作者所有，使用 MIT License�
 ```text
 .
 ├── config/
-│   └── mediamtx.yml                 K3 RTSP → WebRTC 示例配置
+│   ├── mediamtx.yml                 上游 v1.20.1 原始默认配置
+│   └── mediamtx-k3.yml              K3 RTSP → WebRTC 示例配置
 ├── docs/
 │   └── MEDIAMTX_K3_DEPLOYMENT.md    完整编译、部署和排错教程
 ├── scripts/
@@ -59,6 +60,12 @@ mediamtx_v1.20.1_linux_riscv64/
 └── mediamtx.yml
 ```
 
+其中 `mediamtx.yml` 直接取自上游 `v1.20.1` tag，SHA-256 为：
+
+```text
+bc3c9771d125fd632c834b5abf2e00d305a004659f4900cd2c0977b429f56946
+```
+
 下载后验证：
 
 ```bash
@@ -84,11 +91,20 @@ v1.20.1
 
 ## 在 K3 上快速运行
 
+Release 压缩包中的 `mediamtx.yml` 与上游 MediaMTX `v1.20.1` 官方 Release 配置逐字节一致，没有为 K3 修改。直接使用官方默认配置启动：
+
 ```bash
 ./mediamtx mediamtx.yml
 ```
 
-默认配置提供：
+如需使用本仓库为骰子项目准备的 K3 精简配置，请从仓库复制并显式使用：
+
+```bash
+cp config/mediamtx-k3.yml ./mediamtx-k3.yml
+./mediamtx mediamtx-k3.yml
+```
+
+K3 示例配置提供：
 
 | 功能 | 地址 |
 | --- | --- |
@@ -98,7 +114,7 @@ v1.20.1
 | WHEP | `http://<K3-IP>:8889/dice/whep` |
 | Control API | `http://127.0.0.1:9997`，仅板端本机 |
 
-`mediamtx.yml` 默认只开启当前项目需要的 RTSP、WebRTC/WHEP 和本机 Control API。HLS、RTMP、SRT、MoQ 等能力没有从二进制中删除，只是在配置中关闭，可按需重新启用。
+`config/mediamtx-k3.yml` 只开启当前项目需要的 RTSP、WebRTC/WHEP 和本机 Control API。Release 内的官方 `mediamtx.yml` 保留上游完整默认配置；HLS、RTMP、SRT、MoQ 等能力也都保留。
 
 ## 如何从官方源码交叉编译
 
@@ -140,7 +156,7 @@ cd spacemit-mediamtx
 3. 从 `https://github.com/bluenviron/mediamtx` 克隆官方 `v1.20.1` tag；
 4. 执行 `go generate ./...`，生成版本文件和嵌入资源；
 5. 使用 `GOOS=linux`、`GOARCH=riscv64`、`CGO_ENABLED=0` 交叉编译；
-6. 将 `mediamtx`、`mediamtx.yml` 和 `LICENSE` 打包；
+6. 从同一官方 tag 复制未经修改的 `mediamtx.yml`，并与 `mediamtx`、`LICENSE` 一起打包；
 7. 生成 SHA-256 校验文件；
 8. 自动删除 `/tmp` 下的临时 Go SDK 和上游源码。
 

@@ -40,7 +40,7 @@ echo "[4/6] Cross-compiling linux/riscv64"
 CGO_ENABLED=0 GOOS=linux GOARCH=riscv64 \
   "$GO_ROOT/bin/go" build -trimpath -o "$PACKAGE_DIR/mediamtx" .
 
-cp "$ROOT_DIR/config/mediamtx.yml" "$PACKAGE_DIR/mediamtx.yml"
+cp "$SRC_DIR/mediamtx.yml" "$PACKAGE_DIR/mediamtx.yml"
 cp LICENSE "$PACKAGE_DIR/LICENSE"
 chmod 0755 "$PACKAGE_DIR/mediamtx"
 
