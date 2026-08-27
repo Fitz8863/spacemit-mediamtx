@@ -1,0 +1,47 @@
+# MediaMTX v1.20.1 configuration for SpaceMIT K3 (linux/riscv64).
+#
+# Input:  publish H.264 over RTSP to rtsp://127.0.0.1:8554/dice
+# Output: open WebRTC at http://<K3-IP>:8889/dice/
+# WHEP:   http://<K3-IP>:8889/dice/whep
+
+logLevel: info
+logDestinations: [stdout]
+
+# Keep the Control API local to the board.
+api: true
+apiAddress: 127.0.0.1:9997
+metrics: false
+pprof: false
+playback: false
+
+# Receive H.264 from the application through RTSP/TCP.
+rtsp: true
+rtspTransports: [tcp]
+rtspAddress: :8554
+
+# Disable protocols that are not needed by the initial K3 deployment.
+# These features remain compiled into the binary and can be enabled later.
+rtmp: false
+hls: false
+srt: false
+moq: false
+
+# WebRTC HTTP/WHEP signaling and ICE/SRTP media transport.
+webrtc: true
+webrtcAddress: :8889
+webrtcEncryption: false
+webrtcAllowOrigins: ["*"]
+webrtcLocalUDPAddress: :8189
+webrtcLocalTCPAddress: ""
+webrtcIPsFromInterfaces: true
+webrtcAdditionalHosts: []
+webrtcICEServers2: []
+
+pathDefaults:
+  source: publisher
+  sourceOnDemand: false
+  maxReaders: 0
+
+paths:
+  dice:
+    source: publisher

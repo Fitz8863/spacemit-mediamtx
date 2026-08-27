@@ -1,0 +1,15 @@
+[Unit]
+Description=MediaMTX RTSP and WebRTC server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/spacemit/projects/mediamtx
+ExecStart=/home/spacemit/projects/mediamtx/mediamtx /home/spacemit/projects/mediamtx/mediamtx.yml
+Restart=on-failure
+RestartSec=2
+LimitNOFILE=65536
+
+[Install]
+WantedBy=default.target
